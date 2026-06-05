@@ -22,13 +22,17 @@ class MenuViewModel : ViewModel() {
         fetchMeals()
     }
 
-    private fun fetchMeals() {
+    fun fetchMeals(category: String? = null) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                _meals.value = repository.getMeals()
+                if (category == null) {
+                    _meals.value = repository.getMeals()
+                } else {
+                    _meals.value = repository.getMealsByCategory(category)
+                }
             } catch (e: Exception) {
-                // Handle error
+
             } finally {
                 _isLoading.value = false
             }
