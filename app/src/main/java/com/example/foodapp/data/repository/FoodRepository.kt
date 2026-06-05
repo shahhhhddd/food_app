@@ -7,4 +7,8 @@ class FoodRepository(private val apiService: FoodApiService) {
     suspend fun getMeals(): List<Meal> {
         return apiService.getMeals().meals
     }
+
+    suspend fun getMealsByCategory(category: String): List<Meal> {
+        return apiService.getMealsByCategory(category).meals
+    }
 }
